@@ -102,7 +102,15 @@ def calcAndPlot(rst,ratio):
     v=[i*ratio for i in v]
         
     x=[i/24 for i in range(len(v))]
-    plt.plot(x,v)
+    
+    f1 = np.polyfit(x, v, 1)
+    p1 = np.poly1d(f1)
+    vfit=p1(x)
+    
+    plt.plot(x,v,label="raw")
+    plt.plot(x,vfit,label="fit")
+    plt.legend()
+    plt.grid()
     plt.xlabel("time(second)")
     plt.ylabel("speed(kmph)")
     plt.ylim((0,200))
